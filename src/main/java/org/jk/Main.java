@@ -9,32 +9,45 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Main {
+    private static final String FILE_PATH = "src/test/resources/FILE.DAT";
+    static List<Company> companies = new ArrayList<Company>();
 
     public static void main(String[] args) {
+        readFromFile();
+        Map<String, Double> map = groupByCountry();
+        Map<String, Double> map2 = groupByCity();
+        System.out.println(map);
+        System.out.println(map2);
+    }
+
+    private static Map<String, Double> groupByCity() {
+        // Determining average amount grouped by city
+        Map<String, Double> map2 = companies.stream()
+                .filter(c -> isNotEmpty(c.getCity()))
+                .collect(Collectors.groupingBy(Company::getCity, Collectors.averagingDouble(Company::getAmount)));
+        return map2;
+    }
+
+    private static Map<String, Double> groupByCountry() {
+        // Determining average amount grouped by country
+        Map<String, Double> map = companies.stream()
+                .filter(c -> isNotEmpty(c.getCountry()))
+                .collect(
+                        Collectors.groupingBy(Company::getCountry, Collectors.averagingDouble(Company::getAmount)));
+        return map;
+    }
+
+
+    private static void readFromFile() {
         try {
-            List<Company> companies = new ArrayList<Company>();
-            Files.lines(Paths.get("src/test/resources/FILE.DAT")).skip(1).forEach(line -> {
+            Files.lines(Paths.get(FILE_PATH)).skip(1).forEach(line -> {
                 String[] arr = line.split("\t");
                 Company company = setCompanyData(arr);
-                System.out.println(company);
+                companies.add(company);
             });
-
-            // Determining average amount grouped by country
-            Map<String, Double> map = companies.stream()
-                    .filter(c -> isNotEmpty(c.getCountry()))
-                    .collect(
-                            Collectors.groupingBy(Company::getCountry, Collectors.averagingDouble(Company::getAmount)));
-
-            // Determining average amount grouped by city
-            Map<String, Double> map2 = companies.stream()
-                    .filter(c -> isNotEmpty(c.getCity()))
-                    .collect(Collectors.groupingBy(Company::getCity, Collectors.averagingDouble(Company::getAmount)));
-            System.out.println(map);
-            System.out.println(map2);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private static Boolean isNotEmpty(String country) {
