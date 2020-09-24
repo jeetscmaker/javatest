@@ -19,7 +19,7 @@ public class Main {
     }
 
     /* Average amount in EURO grouped by country */
-    private static Map<String, Double> groupByCountry(List<Company> companies) {
+    public static Map<String, Double> groupByCountry(List<Company> companies) {
         Map<String, Double> averageAmountByCountry = companies.stream()
                 .filter(c -> Util.isNotEmpty(c.getCountry()))
                 .collect(
@@ -28,7 +28,7 @@ public class Main {
     }
 
     /* Average amount in EURO grouped by city */
-    private static Map<String, Double> groupByCity(List<Company> companies) {
+    public static Map<String, Double> groupByCity(List<Company> companies) {
         Map<String, Double> averageAmountByCity = companies.stream()
                 .filter(c -> Util.isNotEmpty(c.getCity()))
                 .collect(Collectors.groupingBy(Company::getCity, Collectors.averagingDouble(Company::getAmount)));
