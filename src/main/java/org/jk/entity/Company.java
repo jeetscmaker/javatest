@@ -2,6 +2,8 @@ package org.jk.entity;
 
 import org.jk.util.Util;
 
+import java.util.Objects;
+
 public class Company {
     private String companyCode;
     private String account;
@@ -71,6 +73,25 @@ public class Company {
     public String toString() {
         return "Company [companyCode=" + companyCode + ", account=" + account + ", city=" + city + ", country="
                 + country + ", creditRating=" + creditRating + ", currency=" + currency + ", amount=" + amount + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Company company = (Company) o;
+        return Double.compare(company.amount, amount) == 0 &&
+                companyCode.equals(company.companyCode) &&
+                account.equals(company.account) &&
+                Objects.equals(city, company.city) &&
+                Objects.equals(country, company.country) &&
+                Objects.equals(creditRating, company.creditRating) &&
+                Objects.equals(currency, company.currency);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(companyCode, account);
     }
 
     public static Company setCompanyData(String[] arr) {
