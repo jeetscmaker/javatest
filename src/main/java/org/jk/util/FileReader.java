@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReader {
-    private static final String FILE_PATH = "src/test/resources/FILE.DAT";
+    private static final String FILE_PATH = "src/main/resources/FILE.DAT";
 
     public static List<Company> readFromFile() {
         List<Company> companies = new ArrayList<>();
