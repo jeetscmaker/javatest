@@ -1,7 +1,10 @@
 package org.jk.exception;
 
 public class FileReadException extends RuntimeException {
-    public FileReadException(String message) {
-        super(message);
-    }
+
+	private static final long serialVersionUID = 1L;
+
+	public FileReadException(String message) {
+		super(message);
+	}
 }

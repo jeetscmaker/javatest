@@ -1,14 +1,12 @@
 package org.jk.util;
 
-import org.jk.entity.Company;
-import org.jk.exception.FileReadException;
-
-import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jk.entity.Company;
+import org.jk.exception.FileReadException;
 
 public class FileReader {
     public static List<Company> readFromFile(String filePath) {

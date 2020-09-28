@@ -34,7 +34,7 @@ public class TestFileReader {
 
     @Test(expected = FileReadException.class)
     public void test_readFromFile_Error(){
-        List<Company> companyList = FileReader.readFromFile(null);
+       FileReader.readFromFile(null);
     }
 
     private void setupData() {
