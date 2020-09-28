@@ -15,11 +15,9 @@ public class AverageAmountComputation {
     public static void main(String[] args) {
         List<Company> companies = FileReader.readFromFile(FILE_PATH);
         Map<String, Double> map = groupByCountry(companies);
-        Map<String, Double> map2 = groupByCity(companies);
-        Map<String, Double> map3 = groupByCreditRating(companies);
+        Map<String, Double> map2 = groupByCreditRating(companies);
         System.out.println(map);
         System.out.println(map2);
-        System.out.println(map3);
     }
 
     /* Average amount in EURO grouped by country */
@@ -29,14 +27,6 @@ public class AverageAmountComputation {
                 .collect(
                         Collectors.groupingBy(Company::getCountry, Collectors.averagingDouble(Company::getAmount)));
         return averageAmountByCountry;
-    }
-
-    /* Average amount in EURO grouped by city */
-    public static Map<String, Double> groupByCity(List<Company> companies) {
-        Map<String, Double> averageAmountByCity = companies.stream()
-                .filter(c -> isNotEmpty(c.getCity()))
-                .collect(Collectors.groupingBy(Company::getCity, Collectors.averagingDouble(Company::getAmount)));
-        return averageAmountByCity;
     }
 
     /* Average amount in EURO grouped by Credit rating */
