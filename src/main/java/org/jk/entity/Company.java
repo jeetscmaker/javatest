@@ -1,6 +1,6 @@
 package org.jk.entity;
 
-import org.jk.util.Util;
+import static org.jk.util.CurrencyConverter.amountInEuro;
 
 import java.util.Objects;
 
@@ -100,9 +100,9 @@ public class Company {
         company.setAccount(arr[1]);
         company.setCity(arr[2]);
         company.setCountry(arr[3]);
-        company.setCurrency(arr[4]);
-        company.setCreditRating(arr[5]);
-        company.setAmount(Util.amountInEuro(Double.parseDouble(arr[6]), arr[4]));
+        company.setCreditRating(arr[4]);
+        company.setCurrency(arr[5]);
+        company.setAmount(amountInEuro(Double.parseDouble(arr[6]), arr[5]));
         return company;
     }
 }

@@ -1,9 +1,9 @@
 package org.jk.util;
 
-public class Util {
-    public static Boolean isNotEmpty(String st) {
-        return (st!=null && !st.equals(""));
-    }
+public class CurrencyConverter {
+    private static final Double GBP_TO_USD = 1.26;
+    private static final Double CHF_TO_USD = 1.04;
+    private static final Double EURO_TO_USD = 1.12;
 
     /**
      * Convert the amount in Euros from the given currency.
@@ -16,13 +16,13 @@ public class Util {
         double amount;
         switch (currency) {
             case "USD":
-                amount = (1 / 1.12) * am;
+                amount = (1 / EURO_TO_USD) * am;
                 break;
             case "GBP":
-                amount = (1.26 / 1.12) * am;
+                amount = (GBP_TO_USD / EURO_TO_USD) * am;
                 break;
             case "CHF":
-                amount = (1.04 / 1.12) * am;
+                amount = (CHF_TO_USD / EURO_TO_USD) * am;
                 break;
             /* considering that the default amount is EURO. */
             default:
